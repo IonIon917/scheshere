@@ -46,6 +46,10 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontSize: 36,
                       color: Colors.white,
                     )),
+                Text("スケジュール共有アプリ",
+                    style: TextStyle(
+                      color: Colors.white,
+                    )),
                 ElevatedButton(
                   onPressed: () {/* ボタンが押せる時 */},
                   style: ElevatedButton.styleFrom(
