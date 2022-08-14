@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 top_route() {
-  runApp(const MyApp());
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
