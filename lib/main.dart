@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:scheshere/top_route.dart';
 import 'top_route.dart';
 
-void main() {
-  runApp(const MyApp());
+ main() {
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -14,9 +14,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       initialRoute: '/',
       routes: {
-        '/':(context) => top_route()
-       
+        '/': (context) => top_route(),
       },
-      )
+    );
   }
 }
