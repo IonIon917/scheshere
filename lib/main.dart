@@ -1,10 +1,11 @@
 import 'dart:html';
 
 import 'package:flutter/material.dart';
+import 'package:scheshere/login_route.dart';
 import 'package:scheshere/top_route.dart';
 import 'top_route.dart';
 
- main() {
+main() {
   runApp(MyApp());
 }
 
@@ -15,6 +16,7 @@ class MyApp extends StatelessWidget {
       initialRoute: '/',
       routes: {
         '/': (context) => top_route(),
+        '/login': (context) => login_route(),
       },
     );
   }
