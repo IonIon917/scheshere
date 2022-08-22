@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:flutter/material.dart';
 import 'package:scheshere/login_route.dart';
 import 'package:scheshere/top_route.dart';
