@@ -46,7 +46,22 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontSize: 36,
                       color: Colors.white,
                     )),
-                TextField(),
+                TextField(
+                    decoration: InputDecoration(
+                  labelText: 'メールアドレス',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(225, 33, 243, 219)),
+                  filled: true,
+                  fillColor: Colors.white,
+                )),
+                TextField(
+                    decoration: InputDecoration(
+                  labelText: 'パスワード',
+                  labelStyle:
+                      TextStyle(color: Color.fromARGB(225, 33, 243, 219)),
+                  filled: true,
+                  fillColor: Colors.white,
+                )),
                 ElevatedButton(
                   onPressed: () {/* ボタンが押せる時 */},
                   style: ElevatedButton.styleFrom(
