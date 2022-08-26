@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:scheshere/main.dart';
+import 'package:scheshere/main_route.dart';
 
 login_route() {
   runApp(MyApp());
@@ -63,7 +64,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   fillColor: Colors.white,
                 )),
                 ElevatedButton(
-                  onPressed: () {/* ボタンが押せる時 */},
+                  onPressed: () {
+                    /* ボタンが押せる時 */ Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => main_route()));
+                  },
                   style: ElevatedButton.styleFrom(
                     primary: Color.fromARGB(255, 33, 243, 219),
                     elevation: 16,
