@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
       ),
       home: Scaffold(
         appBar: MyAppBar(),
+        body: MyBody(),
       ),
     );
   }
