@@ -1,16 +1,38 @@
-# scheshere
+# Users
+|Clumn    |Type      |Options                     |
+|---------|----------|----------------------------|
+|email    |string    |unique                      |
+|nickname |string    |null:false                  |
+|password |string    |null:false 4文字以上          |
+|group    |references|foreign_key:true, null:false|
+|calender |references|foreign_key:true, null:false|
 
-A new Flutter project.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
 
-A few resources to get you started if this is your first Flutter project:
+## Association
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+# Calender
+|Clumn    |Type      |Options                     |
+|---------|----------|----------------------------|
+|title    |string    |null:false                  |
+|item     |integer   |null:false                  |
+|place    |string    |null:false                  |
+|content  |string    |                            |
+|user     |references|foreign_key:true, null:false|
+|group    |references|foreign_key:true, null:false|
+
+
+
+## Association
+
+# Group
+|Clumn    |Type      |Options                     |
+|---------|----------|----------------------------|
+|groupName|string    |null:false                  |
+|groupID  |string    |null:false unique 8文字以上   |
+|user     |references|foreign_key:true, null:false|
+|calender |references|foreign_key:true, null:false|
+
+## Association
