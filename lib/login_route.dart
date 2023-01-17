@@ -36,7 +36,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
         child: Container(
-          color: Color.fromARGB(255, 33, 243, 219),
+          color: Colors.white,
           width: double.infinity,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,21 +45,19 @@ class _MyHomePageState extends State<MyHomePage> {
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 36,
-                      color: Colors.white,
+                      color: Colors.black,
                     )),
                 TextField(
                     decoration: InputDecoration(
                   labelText: 'メールアドレス',
-                  labelStyle:
-                      TextStyle(color: Color.fromARGB(225, 33, 243, 219)),
+                  labelStyle: TextStyle(color: Colors.black),
                   filled: true,
                   fillColor: Colors.white,
                 )),
                 TextField(
                     decoration: InputDecoration(
                   labelText: 'パスワード',
-                  labelStyle:
-                      TextStyle(color: Color.fromARGB(225, 33, 243, 219)),
+                  labelStyle: TextStyle(color: Colors.black),
                   filled: true,
                   fillColor: Colors.white,
                 )),
@@ -69,7 +67,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(builder: (context) => main_route()));
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 33, 243, 219),
+                    primary: Colors.black,
                     elevation: 16,
                   ),
                   child: Text('ログイン'),

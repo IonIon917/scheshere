@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
     return Scaffold(
       body: Center(
         child: Container(
-          color: Color.fromARGB(255, 33, 243, 219),
+          color: Colors.white,
           width: double.infinity,
           child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
@@ -45,11 +45,11 @@ class _MyHomePageState extends State<MyHomePage> {
                       fontWeight: FontWeight.bold,
                       fontStyle: FontStyle.italic,
                       fontSize: 36,
-                      color: Colors.white,
+                      color: Colors.black,
                     )),
                 Text("スケジュール共有アプリ",
                     style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                     )),
                 ElevatedButton(
                   onPressed: () {
@@ -57,7 +57,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(builder: (context) => login_route()));
                   },
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 33, 243, 219),
+                    primary: Colors.black,
                     elevation: 16,
                   ),
                   child: Text('ログイン'),
@@ -65,7 +65,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 ElevatedButton(
                   onPressed: () {/* ボタンが押せる時 */},
                   style: ElevatedButton.styleFrom(
-                    primary: Color.fromARGB(255, 33, 243, 219),
+                    primary: Colors.black,
                     elevation: 16,
                   ),
                   child: Text('新規登録'),
