@@ -1,41 +1,29 @@
 import 'package:flutter/material.dart';
+import 'package:scheshere/schedule-create_route.dart';
 import 'main_route.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:collection';
-import 'package:liquid_swipe/liquid_swipe.dart';
+import 'schedule-create_route.dart';
+import 'schedule_route.dart';
 
 class MyBody extends StatelessWidget {
   const MyBody({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LiquidSwipeSample(),
-    );
-  }
-}
-
-class LiquidSwipeSample extends StatelessWidget {
-  const LiquidSwipeSample({Key? key}) : super(key: key);
-
-  static List<Widget> pages = <Widget>[
-    Container(
-      color: Colors.red,
-    ),
-    Container(
-      color: Colors.yellow,
-    ),
-    Container(
-      color: Colors.green,
-    ),
-  ];
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: LiquidSwipe(
-        pages: pages,
-      ),
+    final PageController controller = PageController();
+    return PageView(
+      /// [PageView.scrollDirection] defaults to [Axis.horizontal].
+      /// Use [Axis.vertical] to scroll vertically.
+      controller: controller,
+      children: const <Widget>[
+        Center(
+          child: Schedule(),
+        ),
+        Center(
+          child: ScheduleII(),
+        ),
+      ],
     );
   }
 }
