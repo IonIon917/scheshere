@@ -63,7 +63,14 @@ class _ScheduleII extends State<ScheduleII> {
                 _focusedDay = focusedDay;
               });
             }
-          })
+          }),
+      FloatingActionButton(
+        onPressed: () {
+          // フローティングアクションボタンを押された時の処理.//
+        },
+        child: Icon(Icons.calendar_month_rounded),
+        backgroundColor: Colors.green,
+      ),
     ]));
   }
 }
