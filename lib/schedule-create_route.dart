@@ -3,6 +3,7 @@ import 'body.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:collection';
 import 'main_route.dart';
+import 'create_route.dart';
 
 class ScheduleII extends StatefulWidget {
   const ScheduleII({Key? key}) : super(key: key);
@@ -66,7 +67,8 @@ class _ScheduleII extends State<ScheduleII> {
           }),
       FloatingActionButton(
         onPressed: () {
-          // フローティングアクションボタンを押された時の処理.//
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => Create()));
         },
         child: Icon(Icons.calendar_month_rounded),
         backgroundColor: Colors.green,
