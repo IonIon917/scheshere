@@ -2,67 +2,40 @@ import 'package:flutter/material.dart';
 import 'main_route.dart';
 import 'package:table_calendar/table_calendar.dart';
 import 'dart:collection';
+import 'package:liquid_swipe/liquid_swipe.dart';
 
-class MyBody extends StatefulWidget {
+class MyBody extends StatelessWidget {
   const MyBody({Key? key}) : super(key: key);
 
   @override
-  State<MyBody> createState() => _MyBody();
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      home: LiquidSwipeSample(),
+    );
+  }
 }
 
-class _MyBody extends State<MyBody> {
-  @override
-  DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
-  CalendarFormat _calendarFormat = CalendarFormat.month;
-  Map<DateTime, List> _eventsList = {};
+class LiquidSwipeSample extends StatelessWidget {
+  const LiquidSwipeSample({Key? key}) : super(key: key);
 
-  int getHashCode(DateTime key) {
-    return key.day * 1000000 + key.month * 10000 + key.year;
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _selectedDay = _focusedDay;
-  }
+  static List<Widget> pages = <Widget>[
+    Container(
+      color: Colors.red,
+    ),
+    Container(
+      color: Colors.yellow,
+    ),
+    Container(
+      color: Colors.green,
+    ),
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final _events = LinkedHashMap<DateTime, List>(
-      equals: isSameDay,
-      hashCode: getHashCode,
-    )..addAll(_eventsList);
-
-    List getEventForDay(DateTime day) {
-      return _events[day] ?? [];
-    }
-
     return Scaffold(
-        body: Column(children: [
-      TableCalendar(
-          firstDay: DateTime.utc(2022, 1, 1),
-          lastDay: DateTime.utc(2050, 12, 31),
-          focusedDay: _focusedDay,
-          calendarFormat: _calendarFormat,
-          onFormatChanged: (format) {
-            if (_calendarFormat != format) {
-              setState(() {
-                _calendarFormat = format;
-              });
-            }
-          },
-          selectedDayPredicate: (day) {
-            return isSameDay(_selectedDay, day);
-          },
-          onDaySelected: (selectedDay, focusedDay) {
-            if (!isSameDay(_selectedDay, selectedDay)) {
-              setState(() {
-                _selectedDay = selectedDay;
-                _focusedDay = focusedDay;
-              });
-            }
-          })
-    ]));
+      body: LiquidSwipe(
+        pages: pages,
+      ),
+    );
   }
 }
