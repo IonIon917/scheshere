@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:scheshere/create_route.dart';
 import 'package:scheshere/schedule-create_route.dart';
 import 'main_route.dart';
 import 'package:table_calendar/table_calendar.dart';
@@ -21,7 +22,7 @@ class MyBody extends StatelessWidget {
           child: Schedule(),
         ),
         Center(
-          child: ScheduleII(),
+          child: Create(),
         ),
       ],
     );
