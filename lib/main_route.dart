@@ -6,6 +6,7 @@ import 'package:scheshere/header.dart';
 import 'header.dart';
 import 'body.dart';
 import 'schedule_route.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 
 main_route() {
   runApp(MyApp());
@@ -15,6 +16,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
+      localizationsDelegates: [
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+      ],
       title: 'ScheShare',
       theme: ThemeData(
         primarySwatch: Colors.blue,
