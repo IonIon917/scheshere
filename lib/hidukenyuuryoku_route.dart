@@ -33,9 +33,9 @@ class _Hiduke extends State<Hiduke> {
     if (datePicked != null && datePicked != dateTime) {
       setState(() {
         dateTime = datePicked;
+        dateFormat = DateFormat("yyyy年MM月dd日").format(dateTime);
       });
     }
-    dateFormat = DateFormat("yyyy年MM月dd日").format(dateTime);
   }
 
   @override
