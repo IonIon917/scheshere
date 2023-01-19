@@ -12,19 +12,39 @@ class Create extends StatefulWidget {
 }
 
 class _Create extends State<Create> {
+  dynamic dateTime;
+
+  @override
+  void initState() {
+    super.initState();
+    dateTime = DateTime.now();
+  }
+
+  _datePicker(BuildContext context) async {
+    final DateTime? datePicked = await showDatePicker(
+        context: context,
+        initialDate: dateTime,
+        firstDate: DateTime(2022),
+        lastDate: DateTime(2050));
+    if (datePicked != null && datePicked != dateTime) {
+      setState(() {
+        dateTime = datePicked;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext) {
     return Scaffold(
       body: Center(
         child: Container(
           child: Column(children: <Widget>[
-            Text('Create',
-                style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 36,
-                  color: Colors.black,
-                )),
+            Text(("$dateTime")),
+            IconButton(
+                onPressed: (() {
+                  _datePicker(context);
+                }),
+                icon: Icon(Icons.calendar_month_rounded))
           ]),
         ),
       ),
