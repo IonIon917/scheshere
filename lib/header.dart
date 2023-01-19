@@ -37,7 +37,7 @@ class _MyAppBar extends State<MyAppBar> {
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: Colors.black,
-        title: !_searchBoolean ? Text('Main') : _searchTextField(),
+        title: !_searchBoolean ? Text('Group名') : _searchTextField(),
         actions: !_searchBoolean
             ? [
                 IconButton(
