@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:scheshere/main.dart';
 import 'body.dart';
-import 'schedule-create_route.dart';
-import 'body.dart';
+import 'schedule_route.dart';
 
 class Create extends StatefulWidget {
   const Create({Key? key}) : super(key: key);
