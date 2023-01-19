@@ -16,13 +16,13 @@ class _Hiduke extends State<Hiduke> {
   dynamic dateTime;
   dynamic dateFormat;
 
-  @override
   void initState() {
     super.initState();
     dateTime = DateTime.now();
     dateFormat = DateFormat("yyyy年MM月dd日").format(dateTime);
   }
 
+  @override
   _datePicker(BuildContext context) async {
     final DateTime? datePicked = await showDatePicker(
         locale: const Locale("ja"),
@@ -35,6 +35,7 @@ class _Hiduke extends State<Hiduke> {
         dateTime = datePicked;
       });
     }
+    dateFormat = DateFormat("yyyy年MM月dd日").format(dateTime);
   }
 
   @override
@@ -43,7 +44,7 @@ class _Hiduke extends State<Hiduke> {
         resizeToAvoidBottomInset: false,
         body: Center(
           child: Container(
-            child: Column(children: <Widget>[
+            child: Row(children: <Widget>[
               Text(("$dateFormat")),
               IconButton(
                   onPressed: (() {

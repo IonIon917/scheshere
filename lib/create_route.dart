@@ -19,9 +19,7 @@ class _Create extends State<Create> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Center(
-        child: Container(
-          child: Hiduke(),
-        ),
+        child: Hiduke(),
       ),
     );
   }
