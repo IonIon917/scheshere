@@ -3,7 +3,7 @@ import 'package:scheshere/main.dart';
 import 'body.dart';
 import 'schedule_route.dart';
 import 'hidukenyuuryoku_route.dart';
-import 'package:riverpod/riverpod.dart';
+import 'package:provider/provider.dart';
 
 class DropDown extends StatefulWidget {
   const DropDown({Key? key}) : super(key: key);
