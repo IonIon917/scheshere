@@ -4,7 +4,6 @@ import 'package:scheshere/top_route.dart';
 import 'package:scheshere/main_route.dart';
 import 'top_route.dart';
 import 'main_route.dart';
-import 'package:provider/provider.dart';
 
 main() {
   runApp(MyApp());
