@@ -17,7 +17,7 @@ class _MyAppBar extends State<MyAppBar> {
   Widget _searchTextField() {
     return TextField(
       autofocus: true,
-      cursorColor: Colors.white,
+      cursorColor: Colors.black,
       style: TextStyle(
         color: Colors.white,
       ),
@@ -26,7 +26,7 @@ class _MyAppBar extends State<MyAppBar> {
         enabledBorder:
             UnderlineInputBorder(borderSide: BorderSide(color: Colors.white)),
         focusedBorder: UnderlineInputBorder(
-          borderSide: BorderSide(color: Colors.white),
+          borderSide: BorderSide(color: Colors.black),
         ),
         hintText: 'グループ検索',
         hintStyle: TextStyle(color: Colors.white),
@@ -36,8 +36,8 @@ class _MyAppBar extends State<MyAppBar> {
 
   Widget build(BuildContext context) {
     return AppBar(
-        backgroundColor: Color.fromARGB(255, 33, 243, 219),
-        title: !_searchBoolean ? Text('Main') : _searchTextField(),
+        backgroundColor: Colors.black,
+        title: !_searchBoolean ? Text('Group名') : _searchTextField(),
         actions: !_searchBoolean
             ? [
                 IconButton(
