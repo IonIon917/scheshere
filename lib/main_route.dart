@@ -11,6 +11,23 @@ import 'package:provider/provider.dart';
 import 'package:scheshere/create_route.dart';
 import 'package:scheshere/delete_route.dart';
 
+WidgetsFlutterBinding.ensureInitialized();
+
+var path = '';
+if (!kIsWeb) {
+  final dir = await getApplicationSupportDirectory();
+  path = dir.path;
+}
+
+final isar = await Isar.open(
+  [
+    CategorySchema,
+    ScheduleSchema,
+    CalendarSchema,
+  ],
+  directory: path,
+);
+
 main_route() {
   runApp(MyApp());
 }
