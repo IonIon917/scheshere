@@ -93,7 +93,10 @@ class _Delete extends State<Delete> {
             filled: true,
             fillColor: Colors.white,
           )),
-          IconButton(onPressed: (() {}), icon: Icon(Icons.clear)),
+          Row(children: <Widget>[
+            IconButton(onPressed: (() {}), icon: Icon(Icons.clear)),
+            IconButton(onPressed: (() {}), icon: Icon(Icons.create)),
+          ])
         ]));
   }
 }
