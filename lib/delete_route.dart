@@ -4,9 +4,18 @@ import 'body.dart';
 import 'schedule_route.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
+import 'schedule_repository.dart';
+import 'collections/calendar.dart';
+import 'collections/category.dart';
+import 'collections/schedule.dart';
 
 class Delete extends StatefulWidget {
-  const Delete({Key? key}) : super(key: key);
+  const Delete({
+    super.key,
+    required this.scheduleRepository,
+  });
+
+  final ScheduleRepository.scheduleRpository;
 
   @override
   State<Delete> createState() => _Delete();
@@ -93,7 +102,9 @@ class _Delete extends State<Delete> {
             filled: true,
             fillColor: Colors.white,
           )),
-          IconButton(onPressed: (() {}), icon: Icon(Icons.clear)),
+          IconButton(onPressed: (() {
+            widget.scheduleRepository.deleteSchedule(schedule),
+          }), icon: Icon(Icons.clear)),
         ]));
   }
 }

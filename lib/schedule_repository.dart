@@ -6,13 +6,14 @@ import 'package:scheshere/schedule_route.dart';
 
 import 'collections/category.dart';
 import 'collections/schedule.dart';
+import 'collections/calendar.dart';
 
 
 ///スケジュールリポジトリ
 ///
 ///スケジュールに関する処理はここを通る
 
-class ScheduleRepository { MemoRepository(this.isar) {
+class ScheduleRepository { ScheduleRepository(this.isar) {
     // メモ一覧の変化を監視してストリームに流す
     isar.schedules.watchLazy().listen((_) async {
       if (!isar.isOpen) {
@@ -21,7 +22,7 @@ class ScheduleRepository { MemoRepository(this.isar) {
       if (_sceduleStreamController.isClosed) {
         return;
       }
-      _sceduleStreamController.sink.add(await findMemos());
+      _sceduleStreamController.sink.add(await findSchedules());
     });
   }
 
@@ -30,7 +31,7 @@ class ScheduleRepository { MemoRepository(this.isar) {
 
   /// メモ一覧を監視したい場合はmemoStreamをlistenしてもらう
   final _sceduleStreamController = StreamController<List<Schedule>>.broadcast();
-  Stream<List<Schedule>> get memoStream => _sceduleStreamController.stream;
+  Stream<List<Schedule>> get scheduleStream => _sceduleStreamController.stream;
 
   /// 終了処理
   void dispose() {
@@ -73,7 +74,7 @@ class ScheduleRepository { MemoRepository(this.isar) {
       ..category.value = category
       ..title = title
       ..place = place
-      ..updatedAt = now;
+      
     return isar.writeTxn(() async {
       await isar.schedules.put(memo);
 

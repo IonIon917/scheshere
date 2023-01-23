@@ -1,28 +1,66 @@
 import 'package:flutter/material.dart';
+import 'package:scheshere/collections/category.dart';
 import 'package:scheshere/main_route.dart';
 import 'body.dart';
 import 'schedule_route.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
+import 'collections/schedule.dart';
+import 'collections/calendar.dart';
+import 'schedule_repository.dart';
 
 class Create extends StatefulWidget {
-  const Create({Key? key}) : super(key: key);
+  const Create(
+    this.scheduleRepository, {
+    super.key,
+    this.schedule,
+  });
+
+  final ScheduleRepository scheduleRepository;
+  final Schedule? schedule;
 
   @override
   State<Create> createState() => _Create();
 }
 
 class _Create extends State<Create> {
+
+///スケジュールカテゴリのコード
+  //表示するカテゴリ
+  final categories = <Category>[];
+  //選択中のカテゴリ
+  Category? _selectedCategory;
+  Category? get selectedCategory => _selectedCategory;
+//入力中のスケジュールコンテンツ
+  final _textController = TextEditingController();
+  String get content => _textController.text;
+  //日付入力のコード
   dynamic dateTime;
   dynamic dateFormat;
 
   @override
   void initState() {
     super.initState();
+    //初期表示日付の設定
     dateTime = DateTime.now();
     dateFormat = DateFormat("yyyy年MM月dd日").format(dateTime);
+
+    () async {
+      //カテゴリーの取得
+      categories.addAll(await widget.scheduleRepository.findCategories());
+
+      //初期値の設定
+      _selectedCategory = categories.firstWhere(
+        (category) => category.id == widget.schedule?.category.value?.id,
+        orElse: () => categories.first,
+      );
+      //再描画する
+      setState(() {});
+
+    };
   }
 
+  //カレンダーから日付入力
   _datePicker(BuildContext context) async {
     final DateTime? datePicked = await showDatePicker(
         locale: const Locale("ja"),
@@ -53,33 +91,27 @@ class _Create extends State<Create> {
                   _datePicker(context);
                 }),
                 icon: Icon(Icons.calendar_month_rounded)),
-            DropdownButton(
-              items: [
-                DropdownMenuItem(
-                  child: Text('Live'),
-                  value: 'Live',
-                ),
-                DropdownMenuItem(
-                  child: Text('練習'),
-                  value: '練習',
-                ),
-                DropdownMenuItem(
-                  child: Text('レコーディング'),
-                  value: 'レコーディング',
-                ),
+            DropdownButton<Category>(
+            value: _selectedCategory;
+            items: categories
+                .map(
+                  (category) => DropdownMenuItem<Category>(
+                      value: category,
+                      child: Text(category.name),
+                      ),
+                      )
+                      .toList(),
+                      const SizedBox(
+                        height: 32,);
               ],
-              onChanged: (String? value) {
+              onChanged: (category) {
                 setState(() {
-                  isSelectedItem = value;
+                  _selectedCategory = category;
                 });
-              },
-              value: isSelectedItem,
-            ),
-            const SizedBox(
-              height: 32,
-            ),
-          ]),
-          TextField(
+              }),
+              )
+              ),}
+            TextField(
               decoration: InputDecoration(
             labelText: 'タイトル',
             labelStyle: TextStyle(color: Colors.black),
@@ -93,7 +125,8 @@ class _Create extends State<Create> {
             filled: true,
             fillColor: Colors.white,
           )),
-          IconButton(onPressed: (() {}), icon: Icon(Icons.edit)),
-        ]));
+          IconButton(onPressed: (() {}), icon: Icon(Icons.edit))
+          
+  
   }
-}
+

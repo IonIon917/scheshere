@@ -10,29 +10,20 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 import 'package:scheshere/create_route.dart';
 import 'package:scheshere/delete_route.dart';
-
-WidgetsFlutterBinding.ensureInitialized();
-
-var path = '';
-if (!kIsWeb) {
-  final dir = await getApplicationSupportDirectory();
-  path = dir.path;
-}
-
-final isar = await Isar.open(
-  [
-    CategorySchema,
-    ScheduleSchema,
-    CalendarSchema,
-  ],
-  directory: path,
-);
+import 'schedule_repository.dart';
 
 main_route() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({
+    super.key,
+    required this.scheduleRepository,
+  });
+
+  final ScheduleRepository scheduleRepository;
+
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
