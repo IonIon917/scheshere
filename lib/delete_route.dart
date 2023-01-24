@@ -88,7 +88,7 @@ class _Delete extends State<Delete> {
           )),
           TextField(
               decoration: InputDecoration(
-            labelText: '場所',
+            labelText: '内容',
             labelStyle: TextStyle(color: Colors.black),
             filled: true,
             fillColor: Colors.white,
