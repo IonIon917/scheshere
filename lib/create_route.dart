@@ -88,7 +88,7 @@ class _Create extends State<Create> {
           )),
           TextField(
               decoration: InputDecoration(
-            labelText: '内容',
+            labelText: '場所',
             labelStyle: TextStyle(color: Colors.black),
             filled: true,
             fillColor: Colors.white,
