@@ -1,28 +1,73 @@
 import 'package:flutter/material.dart';
-import 'package:scheshere/main_route.dart';
+
+import 'main_route.dart';
 import 'body.dart';
 import 'schedule_route.dart';
+
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 
+import 'collections/schedule.dart' as sch;
+import 'collections/calendar.dart';
+import 'collections/category.dart';
+import 'schedule_repository.dart';
+
 class Create extends StatefulWidget {
-  const Create({Key? key}) : super(key: key);
+  const Create(
+    this.scheduleRepository, {
+    super.key,
+    this.schedule,
+  });
+
+  final ScheduleRepository scheduleRepository;
+  final sch.Schedule? schedule;
 
   @override
   State<Create> createState() => _Create();
 }
 
 class _Create extends State<Create> {
+  //表示するカテゴリ一覧
+  final categories = <Category>[];
+  //選択中のカテゴリ
+  Category? _selectedCategory;
+  Category? get selectedCategory => _selectedCategory;
+
+  //入力中のスケジュール
+  final _titleController = TextEditingController();
+  String get title => _titleController.text;
+  final _placeController = TextEditingController();
+  String get place => _placeController.text;
+
+  //日付
   dynamic dateTime;
   dynamic dateFormat;
 
   @override
   void initState() {
     super.initState();
+    //今日の日付の取得
     dateTime = DateTime.now();
     dateFormat = DateFormat("yyyy年MM月dd日").format(dateTime);
+
+    () async {
+      // カテゴリ一覧を取得する
+      categories.addAll(await widget.scheduleRepository.findCategories());
+
+      // 初期値を設定する
+      _selectedCategory = categories.firstWhere(
+        (category) => category.id == widget.schedule?.category.value?.id,
+        orElse: () => categories.first,
+      );
+      _titleController.text = widget.schedule?.title ?? '';
+      _placeController.text = widget.schedule?.place ?? '';
+
+      // 再描画する
+      setState(() {});
+    }();
   }
 
+  //日付取得DatePicker
   _datePicker(BuildContext context) async {
     final DateTime? datePicked = await showDatePicker(
         locale: const Locale("ja"),
@@ -53,27 +98,21 @@ class _Create extends State<Create> {
                   _datePicker(context);
                 }),
                 icon: Icon(Icons.calendar_month_rounded)),
-            DropdownButton(
-              items: [
-                DropdownMenuItem(
-                  child: Text('Live'),
-                  value: 'Live',
-                ),
-                DropdownMenuItem(
-                  child: Text('練習'),
-                  value: '練習',
-                ),
-                DropdownMenuItem(
-                  child: Text('レコーディング'),
-                  value: 'レコーディング',
-                ),
-              ],
-              onChanged: (String? value) {
+            DropdownButton<Category>(
+              value: _selectedCategory,
+              items: categories
+                  .map(
+                    (category) => DropdownMenuItem<Category>(
+                      value: category,
+                      child: Text(category.name),
+                    ),
+                  )
+                  .toList(),
+              onChanged: (category) {
                 setState(() {
-                  isSelectedItem = value;
+                  _selectedCategory = category;
                 });
               },
-              value: isSelectedItem,
             ),
             const SizedBox(
               height: 32,
