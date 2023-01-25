@@ -5,6 +5,8 @@ import 'schedule_route.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:intl/intl.dart';
 
+import 'package:isar/isar.dart';
+
 class Delete extends StatefulWidget {
   const Delete({Key? key}) : super(key: key);
 

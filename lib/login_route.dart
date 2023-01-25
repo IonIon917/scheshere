@@ -2,35 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:scheshere/main.dart';
 import 'package:scheshere/main_route.dart';
 
-login_route() {
-  runApp(MyApp());
-}
+import 'package:scheshere/schedule_repository.dart';
 
-class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+import 'package:isar/isar.dart';
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'ScheShare',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: const MyHomePage(title: 'ScheShare'),
-    );
-  }
-}
+class Login extends StatelessWidget {
+  const Login({super.key, required this.scheduleRepository});
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  final ScheduleRepository scheduleRepository;
 
-  final String title;
-
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
-
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -63,8 +43,11 @@ class _MyHomePageState extends State<MyHomePage> {
                 )),
                 ElevatedButton(
                   onPressed: () {
-                    /* ボタンが押せる時 */ Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => main_route()));
+                    /* ボタンが押せる時 */ Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                Main(scheduleRepository: scheduleRepository)));
                   },
                   style: ElevatedButton.styleFrom(
                     primary: Colors.black,

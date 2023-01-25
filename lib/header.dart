@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'main_route.dart';
 
+import 'package:isar/isar.dart';
+
 class MyAppBar extends StatefulWidget implements PreferredSizeWidget {
   const MyAppBar({Key? key}) : super(key: key);
 
