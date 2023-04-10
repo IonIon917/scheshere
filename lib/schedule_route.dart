@@ -4,19 +4,27 @@ import 'package:table_calendar/table_calendar.dart';
 import 'dart:collection';
 import 'main_route.dart';
 
-class Schedule extends StatefulWidget {
-  const Schedule({Key? key}) : super(key: key);
+import 'package:scheshere/databese/database.dart';
+
+class ScheduleRoute extends StatefulWidget {
+  const ScheduleRoute({
+    Key? key,
+    required this.database,
+  }) : super(key: key);
+
+  final ScheduleDatabase database;
 
   @override
-  State<Schedule> createState() => _Schedule();
+  State<ScheduleRoute> createState() => _Schedule();
 }
 
-class _Schedule extends State<Schedule> {
+class _Schedule extends State<ScheduleRoute> {
+  final database = ScheduleDatabase();
+
   @override
   DateTime _focusedDay = DateTime.now();
   DateTime? _selectedDay;
   CalendarFormat _calendarFormat = CalendarFormat.month;
-  Map<DateTime, List> _eventsList = {};
 
   int getHashCode(DateTime key) {
     return key.day * 1000000 + key.month * 10000 + key.year;
@@ -30,40 +38,38 @@ class _Schedule extends State<Schedule> {
 
   @override
   Widget build(BuildContext context) {
-    final _events = LinkedHashMap<DateTime, List>(
-      equals: isSameDay,
-      hashCode: getHashCode,
-    )..addAll(_eventsList);
-
-    List getEventForDay(DateTime day) {
-      return _events[day] ?? [];
-    }
-
     return Scaffold(
         body: Column(children: [
-      TableCalendar(
-          firstDay: DateTime.utc(2022, 1, 1),
-          lastDay: DateTime.utc(2050, 12, 31),
-          focusedDay: _focusedDay,
-          calendarFormat: _calendarFormat,
-          onFormatChanged: (format) {
-            if (_calendarFormat != format) {
-              setState(() {
-                _calendarFormat = format;
+      Expanded(
+          child: StreamBuilder(
+        stream: database.watchEntries(),
+        builder:
+            (BuildContext context, AsyncSnapshot<List<Schedule>> snapshot) {
+          return TableCalendar(
+              firstDay: DateTime.utc(2022, 1, 1),
+              lastDay: DateTime.utc(2050, 12, 31),
+              focusedDay: _focusedDay,
+              calendarFormat: _calendarFormat,
+              onFormatChanged: (format) {
+                if (_calendarFormat != format) {
+                  setState(() {
+                    _calendarFormat = format;
+                  });
+                }
+              },
+              selectedDayPredicate: (day) {
+                return isSameDay(_selectedDay, day);
+              },
+              onDaySelected: (selectedDay, focusedDay) {
+                if (!isSameDay(_selectedDay, selectedDay)) {
+                  setState(() {
+                    _selectedDay = selectedDay;
+                    _focusedDay = focusedDay;
+                  });
+                }
               });
-            }
-          },
-          selectedDayPredicate: (day) {
-            return isSameDay(_selectedDay, day);
-          },
-          onDaySelected: (selectedDay, focusedDay) {
-            if (!isSameDay(_selectedDay, selectedDay)) {
-              setState(() {
-                _selectedDay = selectedDay;
-                _focusedDay = focusedDay;
-              });
-            }
-          })
+        },
+      ))
     ]));
   }
 }
